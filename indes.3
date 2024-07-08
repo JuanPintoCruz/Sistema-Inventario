@@ -1,0 +1,82 @@
+
+    // Ejecuta la consulta
+    if ($sentencia->execute()) {
+        $mensaje = "Ingreso registrado correctamente.";
+    } else {
+        $mensaje = "Error al registrar el ingreso.";
+    }
+}
+<?php 
+require("BD/bd.php");
+session_start(); // Inicia la sesión antes de verificar si el usuario está autenticado
+
+$url_base = "http://localhost/admin3/";
+
+// Preguntar si el usuario no está autenticado
+if(!isset($_SESSION["usuario"])){
+    // Redirigir al usuario a la página de inicio de sesión
+    header("Location:".$url_base."login.php");
+    exit; // Asegúrate de salir del script después de redirigir al usuario
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin</title>
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+<?php 
+  include("modulos/navbar.php")
+ ?>
+ <?php 
+  include("modulos/aside.php")
+ ?>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <!-- row -->
+        <div class="row align-items-md-stretch">
+            <div class="col-md-12">
+              <div class="h-100 p-5  border rounded-3">
+                 <h2>Bienvenid@ al Administrador
+                <?php echo $_SESSION["usuario"];?></h2>
+                <p>
+                Este espacio es para administrar su sitio web
+                </p>
+                <button  class="btn btn-primary"  type="button">
+                Iniciar Ahora
+                </button>
+              </div>
+            </div>
+        </div>        <!-- row -->
+
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+   <?php 
+  include("modulos/footer.php")
+  ?> 
+  
+
+</div>
+<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+</body>
+</html>
